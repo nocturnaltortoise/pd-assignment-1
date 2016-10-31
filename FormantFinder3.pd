@@ -1,0 +1,34 @@
+#N canvas -4 41 683 685 10;
+#X obj 88 91 sigmund~;
+#X floatatom 29 123 5 0 0 0 - - -;
+#X obj 26 165 < 0;
+#X obj 22 202 change;
+#X obj 22 242 sel 1 0;
+#X obj 21 284 realtime;
+#X floatatom 21 329 5 0 0 0 - - -;
+#X text 90 249 when "1" (i.e. conditional true) \, reset and start
+timing when "0" (i.e. conditional false) \, stop timing;
+#X obj 310 55 bng 15 250 50 0 empty empty empty 17 7 0 10 -262144 -1
+-1;
+#X obj 310 82 openpanel;
+#X msg 310 125 open \$1;
+#X obj 310 161 readsf~;
+#X obj 223 182 dac~;
+#X obj 43 34 dac~;
+#X msg 237 111 1;
+#X msg 271 110 0;
+#X connect 0 0 1 0;
+#X connect 1 0 2 0;
+#X connect 2 0 3 0;
+#X connect 3 0 4 0;
+#X connect 4 0 5 0;
+#X connect 4 1 5 1;
+#X connect 5 0 6 0;
+#X connect 8 0 9 0;
+#X connect 9 0 10 0;
+#X connect 10 0 11 0;
+#X connect 11 0 12 0;
+#X connect 11 0 12 1;
+#X connect 11 0 0 0;
+#X connect 14 0 11 0;
+#X connect 15 0 11 0;
