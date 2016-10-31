@@ -1,0 +1,18 @@
+#N canvas 0 41 450 300 10;
+#X obj 55 54 inlet;
+#X obj 56 95 change;
+#X obj 54 137 sel 1 0;
+#X obj 55 184 realtime;
+#X obj 54 223 t b f;
+#X msg 6 255 relative;
+#X obj 52 300 hist 0 1000 100;
+#X obj 49 331 outlet;
+#X connect 0 0 1 0;
+#X connect 1 0 2 0;
+#X connect 2 0 3 0;
+#X connect 2 1 3 1;
+#X connect 3 0 4 0;
+#X connect 4 0 5 0;
+#X connect 4 1 6 0;
+#X connect 5 0 6 0;
+#X connect 6 0 7 0;
