@@ -1,4 +1,4 @@
-#N canvas 243 134 732 467 10;
+#N canvas 243 132 732 467 10;
 #N canvas 635 254 450 300 formantfinder 1;
 #X obj 20 19 inlet~;
 #X obj 20 63 rfft~;
@@ -23,104 +23,96 @@
 #X connect 5 1 7 0;
 #X connect 9 0 8 0;
 #X restore 79 154 pd formantfinder;
-#N canvas 40 255 779 432 voicingdetector 1;
+#N canvas 573 214 779 432 voicingdetector 1;
 #X obj 83 42 sigmund~;
 #X floatatom 24 74 5 0 0 0 - - -;
-#X obj 17 153 change;
-#X obj 17 193 sel 1 0;
-#X obj 16 235 realtime;
-#X floatatom 66 261 5 0 0 0 - - -;
-#X text 69 188 when "1" (i.e. conditional true) \, reset and start
-timing when "0" (i.e. conditional false) \, stop timing;
-#X obj 153 353 hist 0 1000 100;
-#X obj 104 283 t b f;
-#X msg 84 316 relative;
-#X msg 199 319 clear;
-#X obj 21 126 < 80;
-#X obj 421 143 change;
-#X obj 421 183 sel 1 0;
-#X obj 420 225 realtime;
-#X floatatom 420 270 5 0 0 0 - - -;
-#X text 472 175 when "1" (i.e. conditional true) \, reset and start
-timing when "0" (i.e. conditional false) \, stop timing;
-#X obj 594 308 hist 0 1000 100;
-#X obj 516 270 t b f;
-#X msg 457 296 relative;
-#X msg 705 246 clear;
+#X obj 21 132 < 80;
 #X obj 70 131 > 80;
 #X obj 82 14 inlet~;
-#X obj 153 384 outlet;
-#X obj 594 348 outlet;
+#X obj 132 276 outlet;
 #X obj 43 101 mtof;
+#X obj 25 278 outlet;
+#X obj 322 277 outlet;
+#X text 39 209 voiceless sounds;
+#X text 218 196 voiced sounds;
+#X obj 24 239 duration_histogram;
+#X obj 203 217 duration_histogram;
+#X obj 221 277 outlet;
+#X text 27 298 average;
+#X text 130 297 histogram;
+#X text 223 298 average;
+#X text 323 300 histogram;
+#X text 118 124 human voice range starts at around 80Hz \, anything
+below that is likely unvoiced;
+#X text 150 43 sigmund~ outputs -1500 when it can't find a pitch. Voiceless
+sounds have no pitch \, so detecting -1500 should be enough. To be
+safe \, we detect anything less than normal human voice range.;
 #X connect 0 0 1 0;
-#X connect 1 0 25 0;
-#X connect 2 0 3 0;
-#X connect 3 0 4 0;
-#X connect 3 1 4 1;
-#X connect 4 0 5 0;
-#X connect 5 0 8 0;
-#X connect 7 0 23 0;
-#X connect 8 0 9 0;
-#X connect 8 1 7 0;
-#X connect 9 0 7 0;
-#X connect 10 0 7 0;
-#X connect 11 0 2 0;
+#X connect 1 0 6 0;
+#X connect 2 0 11 0;
+#X connect 3 0 12 0;
+#X connect 4 0 0 0;
+#X connect 6 0 2 0;
+#X connect 6 0 3 0;
+#X connect 11 0 7 0;
+#X connect 11 1 5 0;
 #X connect 12 0 13 0;
-#X connect 13 0 14 0;
-#X connect 13 1 14 1;
-#X connect 14 0 15 0;
-#X connect 15 0 18 0;
-#X connect 17 0 24 0;
-#X connect 18 0 19 0;
-#X connect 18 1 17 0;
-#X connect 19 0 17 0;
-#X connect 20 0 17 0;
-#X connect 21 0 12 0;
-#X connect 22 0 0 0;
-#X connect 25 0 11 0;
-#X connect 25 0 21 0;
+#X connect 12 1 8 0;
 #X restore 206 120 pd voicingdetector;
-#X obj 246 157 tabset voiceless_distribution;
+#X obj 196 185 tabset voiceless_distribution;
 #N canvas 0 0 450 300 (subpatch) 0;
 #X array voiced_distribution 10 float 3;
-#A 0 0.151357 0.0105566 0.078969 0.0962435 0.081711 0.0389361 0.060872
-0.0348231 0.0283795 0.044283;
+#A 0 0.270042 0.07173 0.0949367 0.0864979 0.0801688 0.0295359 0.0464135
+0.021097 0.0168776 0.0147679;
 #X coords 0 1 10 -1 200 140 1 0 0;
 #X restore 60 258 graph;
-#X obj 212 185 tabset voiced_distribution;
+#X obj 387 186 tabset voiced_distribution;
 #N canvas 0 0 450 300 (subpatch) 0;
 #X array voiceless_distribution 10 float 3;
-#A 0 0.446978 0.0313187 0.145742 0.153846 0.13022 0.0153846 0.0229396
-0.0137363 0.00549451 0.00769231;
+#A 0 0.147887 0.0580986 0.0792254 0.0897887 0.0598592 0.0510563 0.0492958
+0.0246479 0.040493 0.0422535;
 #X coords 0 1 10 -1 200 140 1 0 0;
 #X restore 307 257 graph;
 #X obj 92 44 adc~;
 #X obj 58 190 print~ real;
 #X obj 112 218 print~ imaginary;
-#X obj 206 -54 bng 15 250 50 0 empty empty empty 17 7 0 10 -262144
+#X obj 206 -47 bng 15 250 50 0 empty empty empty 17 7 0 10 -262144
 -1 -1;
-#X obj 206 -27 openpanel;
-#X msg 206 16 open \$1;
-#X obj 206 52 readsf~;
-#X msg 133 2 1;
-#X msg 167 1 0;
+#X obj 206 -20 openpanel;
+#X msg 206 23 open \$1;
+#X obj 206 59 readsf~;
+#X msg 133 9 1;
+#X msg 167 8 0;
 #X obj 86 79 *~;
 #X floatatom 46 46 5 0 0 0 - - -;
-#X obj 34 -51 bng 15 250 50 0 empty empty empty 17 7 0 10 -262144 -1
--1;
-#X msg 35 12 1;
-#X text 57 -51 Microphone;
-#X text 229 -55 Sound File;
+#X text 58 -51 Microphone;
+#X text 229 -48 Sound File;
 #X obj 27 147 bng 15 250 50 0 empty empty empty 17 7 0 10 -262144 -1
 -1;
+#X obj 356 -45 bng 15 250 50 0 empty empty empty 17 7 0 10 -262144
+-1 -1;
+#X msg 356 5 \; pd dsp 1;
+#X obj 455 -47 bng 15 250 50 0 empty empty empty 17 7 0 10 -262144
+-1 -1;
+#X msg 455 4 \; pd dsp 0;
+#X text 377 -46 Start;
+#X text 478 -49 Stop;
+#X obj 35 -50 tgl 15 0 empty empty empty 17 7 0 10 -262144 -1 -1 0
+1;
+#X floatatom 345 161 5 0 0 0 - - -;
+#X floatatom 511 164 5 0 0 0 - - -;
+#X msg 532 10 0;
 #X connect 0 0 7 0;
 #X connect 0 1 8 0;
-#X connect 1 0 4 0;
+#X connect 1 0 27 0;
 #X connect 1 1 2 0;
+#X connect 1 2 28 0;
+#X connect 1 3 4 0;
 #X connect 6 0 15 1;
 #X connect 9 0 10 0;
 #X connect 10 0 11 0;
 #X connect 11 0 12 0;
+#X connect 11 0 13 0;
 #X connect 12 0 1 0;
 #X connect 12 0 0 0;
 #X connect 13 0 12 0;
@@ -128,7 +120,11 @@ timing when "0" (i.e. conditional false) \, stop timing;
 #X connect 15 0 0 0;
 #X connect 15 0 1 0;
 #X connect 16 0 15 0;
-#X connect 17 0 18 0;
-#X connect 18 0 16 0;
-#X connect 21 0 7 0;
-#X connect 21 0 8 0;
+#X connect 19 0 7 0;
+#X connect 19 0 8 0;
+#X connect 20 0 21 0;
+#X connect 22 0 23 0;
+#X connect 22 0 29 0;
+#X connect 26 0 16 0;
+#X connect 29 0 27 0;
+#X connect 29 0 28 0;
