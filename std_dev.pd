@@ -8,6 +8,8 @@
 #X floatatom 95 217 5 0 0 0 - - -;
 #X obj 129 15 inlet;
 #X obj 95 257 outlet;
+#X text 60 -2 values;
+#X text 123 -3 averages;
 #X connect 0 0 1 0;
 #X connect 1 0 2 0;
 #X connect 2 0 3 0;
